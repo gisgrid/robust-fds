@@ -35,7 +35,7 @@ Develop a real-time fraud detection system in Java, deploy it on Kubernetes (AWS
 
 ## 2. Main Components
 
-### 🧩 1. Application Source Code (`/app`)
+### 🧩 2.1 Application Source Code (`/app`)
 - Java 17 application source code (under `src/`), using Apache Maven and Amazon Corretto JDK.
 - Includes `pom.xml` and `Dockerfile`.
 - Kubernetes manifests under `app/k8s/`:
@@ -43,7 +43,7 @@ Develop a real-time fraud detection system in Java, deploy it on Kubernetes (AWS
   - `service.yaml`
   - `configmap.yaml`
 
-### ⚙️ 2. Infrastructure as Code (`/infra`)
+### ⚙️ 2.2 Infrastructure as Code (`/infra`)
 - Terraform-based AWS infrastructure setup.
 - Refer to `infra/infra-README.md` for setup instructions and best practices.
 - Modules include:
@@ -53,7 +53,7 @@ Develop a real-time fraud detection system in Java, deploy it on Kubernetes (AWS
 - Terraform files:
   - `main.tf`, `variables.tf`, `outputs.tf`, and more
 
-### 📄 3. Documentation (`/docs`)
+### 📄 2.3 Documentation (`/docs`)
 - `README.md` (this file)
 - [`infra/infra-README.md`](infra/infra-README.md) – infrastructure setup guide
 - [`docs/architecture.md`](docs/architecture.md) – system architecture description
@@ -62,7 +62,7 @@ Develop a real-time fraud detection system in Java, deploy it on Kubernetes (AWS
   - Data flow diagram
 - [`docs/test-report.md`](docs/test-report.md) – detailed test report
 
-### ✅ 4. Test Report (`/docs/test-report.md`)
+### ✅ 2.4 Test Report (`/docs/test-report.md`)
 - **Business Logic Simulation** using normal & fraud scenarios
 - **Unit Testing** using JUnit
 - **Integration Testing** to verify SQS and CloudWatch integration
@@ -72,7 +72,7 @@ Develop a real-time fraud detection system in Java, deploy it on Kubernetes (AWS
 
 ## 3. How to Run & Reproduce
 
-### 🏗 1. Deploy Infrastructure (Terraform)
+### 🏗 3.1 Deploy Infrastructure (Terraform)
 - Includes everything needed to bootstrap cloud infrastructure on AWS.
 - Configure AWS CLI credentials.
 - See [`infra/infra-README.md`](infra/infra-README.md) for:
@@ -80,7 +80,7 @@ Develop a real-time fraud detection system in Java, deploy it on Kubernetes (AWS
   - Placeholder replacement (e.g., `<aws_region>`, `<aws_account_id>`)
   - Terraform plan/apply steps
 
-### 🚀 2. Run the App
+### 🚀 3.2 Run the App
 - Java version: **Amazon Corretto JDK 17**
 - Build tool: **Apache Maven 3.9.9**
 - Docker version: **27.5.1**
@@ -91,7 +91,7 @@ Develop a real-time fraud detection system in Java, deploy it on Kubernetes (AWS
   kubectl apply -f app/k8s/
   ```
 
-### 🧪 3. Testing & Validation
+### 🧪 3.3 Testing & Validation
 - Test environment:
   - **JUnit** for unit testing
   - **LocalStack** for mocking AWS services in local Docker
@@ -104,7 +104,7 @@ Develop a real-time fraud detection system in Java, deploy it on Kubernetes (AWS
 
 ---
 
-## 4. Contact Information
+## 3.4 Contact Information
 
 - Licensed under the **MIT License** – see [LICENSE](LICENSE)
 - Author: **Dan Chen**

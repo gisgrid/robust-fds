@@ -1,0 +1,105 @@
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl get pods -n fraud-detection
+NAME                                   READY   STATUS    RESTARTS   AGE
+fraud-detection-app-7f9497789b-887mc   1/1     Running   0          14m
+fraud-detection-app-7f9497789b-gfd4l   1/1     Running   0          26h
+fraud-detection-app-7f9497789b-jdw8n   1/1     Running   0          17m
+fraud-detection-app-7f9497789b-nlfkw   1/1     Running   0          14m
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl get nodes
+NAME                                            STATUS   ROLES    AGE    VERSION
+ip-10-0-1-43.ap-southeast-2.compute.internal    Ready    <none>   2d1h   v1.32.1-eks-5d632ec
+ip-10-0-2-135.ap-southeast-2.compute.internal   Ready    <none>   2d1h   v1.32.1-eks-5d632ec
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl get pods -n fraud-detection -o wide
+NAME                                   READY   STATUS    RESTARTS   AGE   IP           NODE
+               NOMINATED NODE   READINESS GATES
+fraud-detection-app-7f9497789b-887mc   1/1     Running   0          14m   10.0.2.206   ip-10-0-2-135.ap-southeast-2.compute.internal   <none>           <none>
+fraud-detection-app-7f9497789b-gfd4l   1/1     Running   0          26h   10.0.2.181   ip-10-0-2-135.ap-southeast-2.compute.internal   <none>           <none>
+fraud-detection-app-7f9497789b-jdw8n   1/1     Running   0          18m   10.0.2.74    ip-10-0-2-135.ap-southeast-2.compute.internal   <none>           <none>
+fraud-detection-app-7f9497789b-nlfkw   1/1     Running   0          14m   10.0.2.75    ip-10-0-2-135.ap-southeast-2.compute.internal   <none>           <none>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl delete pod fraud-detection-app-7f9497789b-887mc -n fraud-detection
+pod "fraud-detection-app-7f9497789b-887mc" deleted
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl get pods -n fraud-detection
+NAME                                   READY   STATUS    RESTARTS   AGE
+fraud-detection-app-7f9497789b-92qz7   1/1     Running   0          14s
+fraud-detection-app-7f9497789b-gfd4l   1/1     Running   0          26h
+fraud-detection-app-7f9497789b-jdw8n   1/1     Running   0          19m
+fraud-detection-app-7f9497789b-nlfkw   1/1     Running   0          16m
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl delete pod fraud-detection-app-7f9497789b-jdw8n -n fraud-detection
+pod "fraud-detection-app-7f9497789b-jdw8n" deleted
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl delete pod fraud-detection-app-7f9497789b-nlfkw -n fraud-detection
+pod "fraud-detection-app-7f9497789b-nlfkw" deleted
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl get pods -n fraud-detection
+NAME                                   READY   STATUS    RESTARTS   AGE
+fraud-detection-app-7f9497789b-92qz7   1/1     Running   0          3m27s
+fraud-detection-app-7f9497789b-gfd4l   1/1     Running   0          26h
+fraud-detection-app-7f9497789b-lzhkd   1/1     Running   0          27s
+fraud-detection-app-7f9497789b-z8nnx   1/1     Running   0          19s
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl get pods -n fraud-detection -o wide
+NAME                                   READY   STATUS    RESTARTS   AGE     IP           NODE
+                 NOMINATED NODE   READINESS GATES
+fraud-detection-app-7f9497789b-92qz7   1/1     Running   0          3m41s   10.0.1.192   ip-10-0-1-43.ap-southeast-2.compute.internal    <none>           <none>
+fraud-detection-app-7f9497789b-gfd4l   1/1     Running   0          26h     10.0.2.181   ip-10-0-2-135.ap-southeast-2.compute.internal   <none>           <none>
+fraud-detection-app-7f9497789b-lzhkd   1/1     Running   0          41s     10.0.1.143   ip-10-0-1-43.ap-southeast-2.compute.internal    <none>           <none>
+fraud-detection-app-7f9497789b-z8nnx   1/1     Running   0          33s     10.0.2.246   ip-10-0-2-135.ap-southeast-2.compute.internal   <none>           <none>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl get nodes
+NAME                                            STATUS   ROLES    AGE    VERSION
+ip-10-0-1-43.ap-southeast-2.compute.internal    Ready    <none>   2d2h   v1.32.1-eks-5d632ec
+ip-10-0-2-135.ap-southeast-2.compute.internal   Ready    <none>   2d2h   v1.32.1-eks-5d632ec
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl cordon ip-10-0-1-43.ap-southeast-2.compute.internal
+node/ip-10-0-1-43.ap-southeast-2.compute.internal cordoned
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl drain ip-10-0-1-43.ap-southeast-2.compute.internal --ignore-daemonsets --force --delete-emptydir-data
+node/ip-10-0-1-43.ap-southeast-2.compute.internal already cordoned
+Warning: ignoring DaemonSet-managed Pods: kube-system/aws-node-hw84f, kube-system/fluent-bit-qplg7, kube-system/kube-proxy-pbbtm
+evicting pod fraud-detection/fraud-detection-app-7f9497789b-lzhkd
+evicting pod fraud-detection/fraud-detection-app-7f9497789b-92qz7
+pod/fraud-detection-app-7f9497789b-92qz7 evicted
+pod/fraud-detection-app-7f9497789b-lzhkd evicted
+node/ip-10-0-1-43.ap-southeast-2.compute.internal drained
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl get pods -n fraud-detection
+NAME                                   READY   STATUS    RESTARTS   AGE
+fraud-detection-app-7f9497789b-9lrpp   1/1     Running   0          27s
+fraud-detection-app-7f9497789b-gfd4l   1/1     Running   0          26h
+fraud-detection-app-7f9497789b-wshns   1/1     Running   0          27s
+fraud-detection-app-7f9497789b-z8nnx   1/1     Running   0          3m25s
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl get pods -n fraud-detection -o wide
+NAME                                   READY   STATUS    RESTARTS   AGE     IP           NODE
+                 NOMINATED NODE   READINESS GATES
+fraud-detection-app-7f9497789b-9lrpp   1/1     Running   0          37s     10.0.2.74    ip-10-0-2-135.ap-southeast-2.compute.internal   <none>           <none>
+fraud-detection-app-7f9497789b-gfd4l   1/1     Running   0          26h     10.0.2.181   ip-10-0-2-135.ap-southeast-2.compute.internal   <none>           <none>
+fraud-detection-app-7f9497789b-wshns   1/1     Running   0          37s     10.0.2.75    ip-10-0-2-135.ap-southeast-2.compute.internal   <none>           <none>
+fraud-detection-app-7f9497789b-z8nnx   1/1     Running   0          3m35s   10.0.2.246   ip-10-0-2-135.ap-southeast-2.compute.internal   <none>           <none>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl get nodes
+NAME                                            STATUS                     ROLES    AGE    VERSION
+ip-10-0-1-43.ap-southeast-2.compute.internal    Ready,SchedulingDisabled   <none>   2d2h   v1.32.1-eks-5d632ec
+ip-10-0-2-135.ap-southeast-2.compute.internal   Ready                      <none>   2d2h   v1.32.1-eks-5d632ec
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl uncordon ip-10-0-1-43.ap-southeast-2.compute.internal
+node/ip-10-0-1-43.ap-southeast-2.compute.internal uncordoned
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl get nodes
+NAME                                            STATUS   ROLES    AGE    VERSION
+ip-10-0-1-43.ap-southeast-2.compute.internal    Ready    <none>   2d2h   v1.32.1-eks-5d632ec
+ip-10-0-2-135.ap-southeast-2.compute.internal   Ready    <none>   2d2h   v1.32.1-eks-5d632ec
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl delete pod fraud-detection-app-7f9497789b-9lrpp -n fraud-detection
+pod "fraud-detection-app-7f9497789b-9lrpp" deleted
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl delete pod fraud-detection-app-7f9497789b-wshns -n fraud-detection
+pod "fraud-detection-app-7f9497789b-wshns" deleted
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system> kubectl get pods -n fraud-detection -o wide
+NAME                                   READY   STATUS    RESTARTS   AGE     IP           NODE
+                 NOMINATED NODE   READINESS GATES
+fraud-detection-app-7f9497789b-7db2j   1/1     Running   0          16s     10.0.1.164   ip-10-0-1-43.ap-southeast-2.compute.internal    <none>           <none>
+fraud-detection-app-7f9497789b-gfd4l   1/1     Running   0          26h     10.0.2.181   ip-10-0-2-135.ap-southeast-2.compute.internal   <none>           <none>
+fraud-detection-app-7f9497789b-jvlzx   1/1     Running   0          37s     10.0.1.192   ip-10-0-1-43.ap-southeast-2.compute.internal    <none>           <none>
+fraud-detection-app-7f9497789b-z8nnx   1/1     Running   0          5m57s   10.0.2.246   ip-10-0-2-135.ap-southeast-2.compute.internal   <none>           <none>
+PS C:\03.code\aws-rt-FDS2\fraud-detection-system>

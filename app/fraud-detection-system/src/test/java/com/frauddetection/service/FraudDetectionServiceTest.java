@@ -1,8 +1,7 @@
 package com.frauddetection.service;
 
 import com.frauddetection.model.Transaction;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class FraudDetectionServiceTest {
 
     @InjectMocks
@@ -33,6 +33,8 @@ class FraudDetectionServiceTest {
     }
 
     @Test
+    @Order(1)
+    @DisplayName("1.1 Test Normal Transaction")
     void testNormalTransaction() {
         // Use a non-suspicious account (ACC-004 is not in the suspicious list)
         Transaction transaction = createTransaction("TXN-001", "ACC-004", new BigDecimal("5000"));
@@ -41,7 +43,14 @@ class FraudDetectionServiceTest {
     }
 
     @Test
+    @Order(2)
+    @DisplayName("1.2 Test High Amount Transaction")
     void testHighAmountTransaction() {
+        // Reset configuration to default values
+        ReflectionTestUtils.setField(fraudDetectionService, "amountThreshold", "10000");
+        ReflectionTestUtils.setField(fraudDetectionService, "suspiciousAccounts", "ACC-001,ACC-002,ACC-003");
+        fraudDetectionService.init();
+        
         // Use a non-suspicious account with high amount
         Transaction transaction = createTransaction("TXN-002", "ACC-004", new BigDecimal("15000"));
         fraudDetectionService.processTransaction(transaction);
@@ -49,6 +58,8 @@ class FraudDetectionServiceTest {
     }
 
     @Test
+    @Order(3)
+    @DisplayName("1.3 Test Suspicious Account Transaction")
     void testSuspiciousAccountTransaction() {
         // Test with each suspicious account from the config
         String[] suspiciousAccounts = {"ACC-001", "ACC-002", "ACC-003"};
@@ -61,9 +72,12 @@ class FraudDetectionServiceTest {
     }
 
     @Test
+    @Order(4)
+    @DisplayName("1.4 Test Invalid Amount Threshold")
     void testInvalidAmountThreshold() {
         // Test with invalid amount threshold
         ReflectionTestUtils.setField(fraudDetectionService, "amountThreshold", "invalid");
+        ReflectionTestUtils.setField(fraudDetectionService, "suspiciousAccounts", "ACC-001,ACC-002,ACC-003");
         fraudDetectionService.init();
         
         // Should use default value (10000)
@@ -73,6 +87,8 @@ class FraudDetectionServiceTest {
     }
 
     @Test
+    @Order(5)
+    @DisplayName("1.5 Test Empty Suspicious Accounts")
     void testEmptySuspiciousAccounts() {
         // Test with empty suspicious accounts
         ReflectionTestUtils.setField(fraudDetectionService, "suspiciousAccounts", "");
