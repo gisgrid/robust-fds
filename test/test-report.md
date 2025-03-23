@@ -45,7 +45,8 @@
 All test cases passed successfully.
 
 📂 See:[`01.unit test 1.1-1.5.log`](01.unit test 1.1-1.5.log)
-🖼 Snapshot: `01.unit test 1.1-1.5.log.snapshot.png`
+🖼 Snapshot: 
+![01.unit test 1.1-1.5.log.snapshot.png](./01.unit test 1.1-1.5.log.snapshot.png)
 
 ---
 
@@ -57,8 +58,9 @@ All test cases passed successfully.
 - Verified sending/receiving to SQS
 - Verified log stream writing to CloudWatch
 
-📂 See:[`02.integration test 2.1-2.2.log`](02.integration test 2.1-2.2.log)
-🖼 Snapshot: `02.integration test 2.1-2.2.log.snapshot.png`
+📂 See:![02.integration test 2.1-2.2.log](./02.integration test 2.1-2.2.log)
+🖼 Snapshot: 
+![02.integration test 2.1-2.2.log.snapshot.png](./02.integration test 2.1-2.2.log.snapshot.png)
 
 ---
 
