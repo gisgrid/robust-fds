@@ -60,9 +60,9 @@ Develop a real-time fraud detection system in Java, deploy it on Kubernetes (AWS
   - High-level architecture & diagrams
   - EKS deployment and resilience explanation
   - Data flow diagram
-- [`docs/test-report.md`](docs/test-report.md) – detailed test report
+- [`test/test-report.md`](test/test-report.md) – detailed test report
 
-### ✅ 2.4 Test Report (`/docs/test-report.md`)
+### ✅ 2.4 Test Report (`test/test-report.md`)
 - **Business Logic Simulation** using normal & fraud scenarios
 - **Unit Testing** using JUnit
 - **Integration Testing** to verify SQS and CloudWatch integration
