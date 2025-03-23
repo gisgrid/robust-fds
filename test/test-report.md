@@ -42,9 +42,9 @@
 **Tool**: JUnit  
 **Command**: `mvn test -Dtest=FraudDetectionServiceTest`
 
-📂 [View Log](./test/01.unit%20test%201.1-1.5.log)  
+📂 [View Log](./01.unit%20test%201.1-1.5.log)  
 🖼 Snapshot:  
-![Unit Test Snapshot](./test/01.unit%20test%201.1-1.5.log.snapshot.png)
+![Unit Test Snapshot](./01.unit%20test%201.1-1.5.log.snapshot.png)
 
 ---
 
@@ -53,9 +53,9 @@
 **Tools**: JUnit + LocalStack  
 **Components Tested**: SQS, CloudWatch
 
-📂 [View Log](./test/02.integration%20test%202.1-2.2.log)  
+📂 [View Log](./02.integration%20test%202.1-2.2.log)  
 🖼 Snapshot:  
-![Integration Test Snapshot](./test/02.integration%20test%202.1-2.2.log.snapshot.png)
+![Integration Test Snapshot](./02.integration%20test%202.1-2.2.log.snapshot.png)
 
 ---
 
@@ -67,9 +67,9 @@
 - `AlertConsumerClient.java`
 - `kubectl` (manual pod/node failure)
 
-📂 [TransactionSenderClient Log](./test/03.resilience%20test-run%20TransactionSenderClient.log)  
-📂 [AlertConsumerClient Log](./test/03.resilience%20test-run%20AlertConsumerClient.log)  
-📂 [kubectl Pod/Node Kill Log](./test/03.resilience%20test-run%20kubectl%20to%20kill%20Pod%20and%20Node.log)
+📂 [TransactionSenderClient Log](./03.resilience%20test-run%20TransactionSenderClient.log)  
+📂 [AlertConsumerClient Log](./03.resilience%20test-run%20AlertConsumerClient.log)  
+📂 [kubectl Pod/Node Kill Log](./03.resilience%20test-run%20kubectl%20to%20kill%20Pod%20and%20Node.log)
 
 ---
 
