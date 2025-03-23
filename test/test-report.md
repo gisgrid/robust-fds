@@ -44,8 +44,8 @@
 
 All test cases passed successfully.
 
-📂 See: `./test/01.unit test 1.1-1.5.log`  
-🖼 Snapshot: `./test/01.unit test 1.1-1.5.log.snapshot.png`
+📂 See:[`01.unit test 1.1-1.5.log`](01.unit test 1.1-1.5.log)
+🖼 Snapshot: `01.unit test 1.1-1.5.log.snapshot.png`
 
 ---
 
@@ -57,8 +57,8 @@ All test cases passed successfully.
 - Verified sending/receiving to SQS
 - Verified log stream writing to CloudWatch
 
-📂 See: `./test/02.integration test 2.1-2.2.log`  
-🖼 Snapshot: `./test/02.integration test 2.1-2.2.log.snapshot.png`
+📂 See:[`02.integration test 2.1-2.2.log`](02.integration test 2.1-2.2.log)
+🖼 Snapshot: `02.integration test 2.1-2.2.log.snapshot.png`
 
 ---
 
@@ -80,9 +80,9 @@ All test cases passed successfully.
 - All clients continue 1 tx/sec without interruption
 
 📂 Logs:
-- `./test/03.resilience test-run TransactionSenderClient.log`
-- `./test/03.resilience test-run AlertConsumerClient.log`
-- `./test/03.resilience test-run kubectl to kill Pod and Node.log`
+📂 See:[`03.resilience test-run TransactionSenderClient.log`](03.resilience test-run TransactionSenderClient.log)
+📂 See:[`03.resilience test-run AlertConsumerClient.log`](03.resilience test-run AlertConsumerClient.log)
+📂 See:[`03.resilience test-run kubectl to kill Pod and Node.log`](03.resilience test-run kubectl to kill Pod and Node.log)
 
 ---
 
