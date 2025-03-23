@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fraud-detection-config
+  namespace: default
+data:
+  # Amount threshold for suspicious transactions (in USD)
+  # sample of the fds framework, cloud be extended to more complex way, eg. different amount type with different threshold; managed by more complex config structure or central config db
+  amount-threshold: "10000"
+  
+  # List of suspicious account IDs (comma-separated)
+  # sample of the fds framework, cloud be extended to more complex way, eg. managed by more complex config structure or central config db and the suspicious accounts could be updated
+  suspicious-accounts: "ACC-001,ACC-002,ACC-003" 

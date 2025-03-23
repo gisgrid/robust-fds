@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fraud-detection-app
+  labels:
+    app: fraud-detection
+spec:
+  replicas: 3  # For high availability
+  selector:
+    matchLabels:
+      app: fraud-detection
+  template:
+    metadata:
+      labels:
+        app: fraud-detection
+    spec:
+      containers:
+      - name: fraud-detection
+        image: image: <aws_account_id>.dkr.ecr.<aws_region>.amazonaws.com/<ecr_repository_name>:<tag>
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+          limits:
+            cpu: "1000m"
+            memory: "1Gi"
+        env:
+        - name: AWS_REGION
+          value: "<aws_region>"
+        - name: TRANSACTION_QUEUE_URL
+          value: "https://sqs.<aws_region>.amazonaws.com/<aws_account_id>/transaction-queue"
+        - name: FRAUD_ALERT_QUEUE_URL
+          value: "https://sqs.<aws_region>.amazonaws.com/<aws_account_id>/fraud-alert-queue"
+        - name: ECR_REPOSITORY_URL
+          value: "<aws_account_id>.dkr.ecr.<aws_region>.amazonaws.com/fraud-detection-ecr"
+        # Fraud Detection Configuration
+        - name: AMOUNT_THRESHOLD
+          valueFrom:
+            configMapKeyRef:
+              name: fraud-detection-config
+              key: amount-threshold
+        - name: SUSPICIOUS_ACCOUNTS
+          valueFrom:
+            configMapKeyRef:
+              name: fraud-detection-config
+              key: suspicious-accounts
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 5
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: fraud-detection-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: fraud-detection-app
+  minReplicas: 3
+  maxReplicas: 15  # Adjusted based on node capacity (5 nodes * 3 pods per node)
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80 
