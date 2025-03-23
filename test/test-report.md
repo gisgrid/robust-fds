@@ -42,11 +42,9 @@
 **Tool**: JUnit  
 **Command**: `mvn test -Dtest=FraudDetectionServiceTest`
 
-All test cases passed successfully.
-
-📂 See:[`01.unit test 1.1-1.5.log`](01.unit test 1.1-1.5.log)
-🖼 Snapshot: 
-![01.unit test 1.1-1.5.log.snapshot.png](./01.unit test 1.1-1.5.log.snapshot.png)
+📂 [View Log](./test/01.unit%20test%201.1-1.5.log)  
+🖼 Snapshot:  
+![Unit Test Snapshot](./test/01.unit%20test%201.1-1.5.log.snapshot.png)
 
 ---
 
@@ -55,12 +53,9 @@ All test cases passed successfully.
 **Tools**: JUnit + LocalStack  
 **Components Tested**: SQS, CloudWatch
 
-- Verified sending/receiving to SQS
-- Verified log stream writing to CloudWatch
-
-📂 See:![02.integration test 2.1-2.2.log](./02.integration test 2.1-2.2.log)
-🖼 Snapshot: 
-![02.integration test 2.1-2.2.log.snapshot.png](./02.integration test 2.1-2.2.log.snapshot.png)
+📂 [View Log](./test/02.integration%20test%202.1-2.2.log)  
+🖼 Snapshot:  
+![Integration Test Snapshot](./test/02.integration%20test%202.1-2.2.log.snapshot.png)
 
 ---
 
@@ -72,19 +67,9 @@ All test cases passed successfully.
 - `AlertConsumerClient.java`
 - `kubectl` (manual pod/node failure)
 
-**Simulated Failures**:
-- Single and multiple pod deletions
-- Node drain
-
-**Expectation**:
-- Transactions continue to be processed
-- No alert loss
-- All clients continue 1 tx/sec without interruption
-
-📂 Logs:
-📂 See:[`03.resilience test-run TransactionSenderClient.log`](03.resilience test-run TransactionSenderClient.log)
-📂 See:[`03.resilience test-run AlertConsumerClient.log`](03.resilience test-run AlertConsumerClient.log)
-📂 See:[`03.resilience test-run kubectl to kill Pod and Node.log`](03.resilience test-run kubectl to kill Pod and Node.log)
+📂 [TransactionSenderClient Log](./test/03.resilience%20test-run%20TransactionSenderClient.log)  
+📂 [AlertConsumerClient Log](./test/03.resilience%20test-run%20AlertConsumerClient.log)  
+📂 [kubectl Pod/Node Kill Log](./test/03.resilience%20test-run%20kubectl%20to%20kill%20Pod%20and%20Node.log)
 
 ---
 
