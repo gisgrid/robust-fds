@@ -83,31 +83,53 @@ Develop a real-time fraud detection system in Java, deploy it on Kubernetes (AWS
   - Placeholder replacement (e.g., `<aws_region>`, `<aws_account_id>`)
   - Terraform plan/apply steps
 
-### 🚀 3.2 Run the App
+### 🚀 3.2 Build & Push Docker Image
 - Java version: **Amazon Corretto JDK 17**
 - Build tool: **Apache Maven 3.9.9**
 - Docker version: **27.5.1**
-- Build and run:
+- Build and push:
   ```bash
   mvn clean install
-  docker build -t fraud-detection .
-  kubectl apply -f app/k8s/
+  docker build -t <your-ecr-repo>:latest .
+  aws ecr get-login-password | docker login --username AWS --password-stdin <your-aws-account>.dkr.ecr.<region>.amazonaws.com
+  docker push <your-ecr-repo>:latest
   ```
 
-### 🧪 3.3 Testing & Validation
-- Test environment:
-  - **JUnit** for unit testing
-  - **LocalStack** for mocking AWS services in local Docker
-- Test source code is in `src/test/`
-- Running tests:
+### 🧪 3.3 Testing & Validation (LocalStack)
+- Local development and unit testing use **LocalStack** to simulate AWS services:
+  - SQS, CloudWatch, etc.
+- Run tests:
   ```bash
   mvn test
   ```
-- Full testing process and cases are documented in [`docs/test-report.md`](docs/test-report.md)
+- Test logic is under `src/test/`
+- See [`test/test-report.md`](test/test-report.md) for full details.
+
+### ☁️ 3.4 Reproduce on AWS EKS (End-to-End)
+- After `terraform apply` completes:
+  - Infra + Kubernetes manifests are already provisioned.
+  - Verify EKS resources:
+    ```bash
+    aws eks update-kubeconfig --name <cluster-name> --region <region>
+    kubectl get nodes
+    kubectl get pods
+    ```
+  - Check logs:
+    ```bash
+    kubectl logs <pod-name>
+    ```
+- Send test messages to the live SQS queue to trigger fraud detection:
+  ```bash
+  aws sqs send-message \
+    --queue-url <your-queue-url> \
+    --message-body '{"accountId": "123", "amount": 9999}'
+  ```
+- Observe detection results via CloudWatch logs or alerts.
+- For resilience validation, simulate failures (pod eviction, node drain, etc.) — see [`test/test-report.md`](test/test-report.md).
 
 ---
 
-## 3.4 Contact Information
+## 4 Contact Information
 
 - Licensed under the **MIT License** – see [LICENSE](LICENSE)
 - Author: **Dan Chen**
